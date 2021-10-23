@@ -5,7 +5,7 @@ using UnityEngine;
 public class Sugar_drop : MonoBehaviour
 {
     public GameObject sugar_white;
-    int sugarCount = 0;
+    public int sugarCount = 0;
 
     void OnTriggerEnter(Collider other)
     {
