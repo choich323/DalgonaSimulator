@@ -433,7 +433,7 @@ namespace Leap.Unity.Interaction {
           GameObject contactBoneObj = new GameObject("Contact Fingerbone", typeof(CapsuleCollider), typeof(Rigidbody), typeof(ContactBone));
           contactBoneObj.layer = manager.contactBoneLayer;
           if(jointIndex == 2)
-              contactBoneObj.tag = "Hand";
+              contactBoneObj.tag = "Finger";
           
           Bone bone = _unwarpedHandData.Fingers[fingerIndex]
                                        .Bone((Bone.BoneType)(jointIndex) + 1); // +1 to skip first bone.
@@ -474,6 +474,7 @@ namespace Leap.Unity.Interaction {
         int boneArrayIndex = NUM_FINGERS * BONES_PER_FINGER;
         contactBoneObj.transform.position = _unwarpedHandData.PalmPosition.ToVector3();
         contactBoneObj.transform.rotation = _unwarpedHandData.Rotation.ToQuaternion();
+        contactBoneObj.tag = "Palm";
 
 
         // Remember the method we used to calculate the palm from a Leap Hand for later.

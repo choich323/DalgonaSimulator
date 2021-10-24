@@ -10,6 +10,12 @@ TagManager:
   - B3
   - B4
   - Hand
+  - Reset
+  - BakingSoda
+  - MixStick
+  - Sugar
+  - Finger
+  - Palm
   layers:
   - Default
   - TransparentFX

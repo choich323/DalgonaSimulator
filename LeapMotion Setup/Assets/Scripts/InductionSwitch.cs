@@ -10,7 +10,7 @@ public class InductionSwitch : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Hand")
+        if(other.gameObject.tag == "Finger")
         {
             if (!isOn)
             {
