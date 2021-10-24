@@ -6,6 +6,7 @@ public class Stick : MonoBehaviour
 {
     public GameObject sugar_brown;
     public GameObject sugar_white;
+    public GameObject swtch;
     public int total_MixCount;
     int mixCount1 = 0;
     int mixCount2 = 0;
@@ -14,14 +15,17 @@ public class Stick : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "B1")
-            mixCount1++;
-        else if (other.gameObject.tag == "B2")
-            mixCount2++;
-        else if (other.gameObject.tag == "B3")
-            mixCount3++;
-        else if (other.gameObject.tag == "B4")
-            mixCount4++;
+        if (swtch.activeInHierarchy)
+        {
+            if (other.gameObject.tag == "B1")
+                mixCount1++;
+            else if (other.gameObject.tag == "B2")
+                mixCount2++;
+            else if (other.gameObject.tag == "B3")
+                mixCount3++;
+            else if (other.gameObject.tag == "B4")
+                mixCount4++;
+        }
     }
 
     void FixedUpdate()

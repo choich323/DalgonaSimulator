@@ -9,6 +9,7 @@ TagManager:
   - B2
   - B3
   - B4
+  - Hand
   layers:
   - Default
   - TransparentFX
