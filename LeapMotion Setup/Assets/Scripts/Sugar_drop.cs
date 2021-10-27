@@ -5,19 +5,48 @@ using UnityEngine;
 public class Sugar_drop : MonoBehaviour
 {
     public GameObject sugar_white;
-    public int sugarCount = 0;
+    public GameObject brown_mole;
+    public GameObject swtch;
+    public GameObject withBakingSoda;
+    public GameObject effect;
+    int sugarCount = 0;
+    int bakingCount = 0;
+    bool isWhite = false;
+    bool isBakingsoda = false;
 
+    void Update()
+    {
+        if (!isWhite && sugarCount == 5)
+        {
+            sugar_white.SetActive(true);
+            isWhite = true;
+        }
+
+        if (!isBakingsoda && bakingCount == 4)
+        {
+            sugar_white.SetActive(false);
+            withBakingSoda.SetActive(true);
+            isBakingsoda = true;
+        }
+    }
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "SugarCase")
+        if (other.gameObject.tag == "SugarCase")
         {
             sugarCount++;
+            effect.SetActive(true);
+        }
+
+        if (!swtch.activeInHierarchy && brown_mole.activeInHierarchy && other.gameObject.tag == "BakingSodaCase")
+        {
+            bakingCount++;
+            effect.SetActive(true);
         }
     }
 
-    void FixedUpdate()
+    void OnTriggerExit(Collider other)
     {
-        if (sugarCount == 5)
-            sugar_white.SetActive(true);
+        effect.SetActive(false);
     }
+
 }

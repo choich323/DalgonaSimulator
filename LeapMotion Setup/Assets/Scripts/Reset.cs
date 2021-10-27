@@ -25,8 +25,8 @@ public class Reset : MonoBehaviour
             }
             else if (obj.tag == "BakingSoda")
             {
-                obj.transform.position = new Vector3(-0.632f, 1.433f, 0.278f);
-                obj.transform.rotation = Quaternion.identity;
+                obj.transform.position = new Vector3(-0.955f, 1.433f, 0.23f);
+                obj.transform.rotation = Quaternion.Euler(0, -38.612f, 0);
             }
             else if (obj.tag == "MixStick")
             {
