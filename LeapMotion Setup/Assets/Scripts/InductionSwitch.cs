@@ -10,6 +10,9 @@ public class InductionSwitch : MonoBehaviour
     public GameObject white;
     public GameObject white_mole;
     public GameObject brown_mole;
+    public GameObject danger;
+    public GameObject failed;
+    public GameObject complete;
 
     bool isOn = false;
     bool swtchReady = true;
@@ -19,6 +22,9 @@ public class InductionSwitch : MonoBehaviour
     
     void Update()
     {
+        if (isOn)
+            burningCount += Time.deltaTime;
+        Burning();
         Burned();
         swtchDelay += Time.deltaTime;
         swtchReady = rate < swtchDelay;
@@ -43,12 +49,26 @@ public class InductionSwitch : MonoBehaviour
         }
     }
 
+    void Burning()
+    {
+        if (burningCount > 20 && burningCount <= 35 && isOn)
+            danger.SetActive(true);
+
+        if (burningCount > 20 && !isOn)
+            danger.SetActive(false);
+
+    }
+
     void Burned()
     {
-        burningCount += Time.deltaTime;
-        if(burningCount > 40)
+        if(burningCount > 35 && !complete.activeInHierarchy)
         {
-
+            white.SetActive(false);
+            white_mole.SetActive(false);
+            brown_mole.SetActive(false);
+            burned.SetActive(true);
+            danger.SetActive(false);
+            failed.SetActive(true);
         }
     }
 }

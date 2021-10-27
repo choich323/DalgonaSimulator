@@ -12,17 +12,37 @@ public class Stick : MonoBehaviour
     public GameObject sugar_brown_high;
     public GameObject sugar_complete;
     public GameObject swtch;
+
+    public GameObject startMessage;
+    public GameObject swtchOnMessage;
+
+    public GameObject stirtoBrownMessage;
+    public GameObject swtchOffMessage;
+    public GameObject bsPickupMessage;
+    public GameObject stirMessage;
+
+    public GameObject overFlowing;
+    public GameObject clear;
+    public GameObject failed_overflow;
+
     public int total_MixCount;
+
+    bool isStart = false;
+    bool needFire = true;
+
     int mixCount1 = 0;
     int mixCount2 = 0;
     int mixCount3 = 0;
     int mixCount4 = 0;
+    float time = 0;
     float time1 = 0;
     float time2 = 0;
     float time3 = 0;
 
     void OnTriggerEnter(Collider other)
     {
+
+
         if (swtch.activeInHierarchy && sugar_white.activeInHierarchy && !sugar_white_mole.activeInHierarchy)
             MixCount(other, 6);
         else if (swtch.activeInHierarchy && sugar_white_mole.activeInHierarchy)
@@ -34,6 +54,8 @@ public class Stick : MonoBehaviour
         else if (!swtch.activeInHierarchy && sugar_brown_high.activeInHierarchy)
             MixCount(other, 27);
     }
+
+
 
     void MixCount(Collider other, int value)
     {
@@ -49,6 +71,7 @@ public class Stick : MonoBehaviour
 
     void Update()
     {
+        UI();
         Sum();
         SugarChangetoWhiteMole();
         SugarChangetoBrownMole();
@@ -56,6 +79,66 @@ public class Stick : MonoBehaviour
         SugarChangeBrown_Middle();
         SugarChangeBrown_High();
         SugarChangeBrown_Complete();
+        Clear();
+    }
+
+    void UI()
+    {
+        if (!isStart && sugar_white.activeInHierarchy) {
+            startMessage.SetActive(false);
+            isStart = true;
+            swtchOnMessage.SetActive(true);
+        }
+
+        if (swtch.activeInHierarchy && !startMessage.activeInHierarchy)
+        {
+            swtchOnMessage.SetActive(false);
+            stirtoBrownMessage.SetActive(true);
+        }
+
+        if (stirtoBrownMessage.activeInHierarchy && !swtch.activeInHierarchy) // 예외 처리
+        {
+            stirtoBrownMessage.SetActive(false);
+            swtchOnMessage.SetActive(true);
+        }
+        
+        if(sugar_brown_mole.activeInHierarchy && swtch.activeInHierarchy)
+        {
+            stirtoBrownMessage.SetActive(false);
+            swtchOffMessage.SetActive(true);
+        }
+
+        if (swtchOffMessage.activeInHierarchy && !swtch.activeInHierarchy)
+        {
+            swtchOffMessage.SetActive(false);
+            bsPickupMessage.SetActive(true);
+        }
+
+        if(bsPickupMessage.activeInHierarchy && swtch.activeInHierarchy) // 예외 처리
+        {
+            bsPickupMessage.SetActive(false);
+            swtchOffMessage.SetActive(true);
+        }
+
+        if (bsPickupMessage.activeInHierarchy && withBakingSoda.activeInHierarchy)
+        {
+            bsPickupMessage.SetActive(false);
+            stirMessage.SetActive(true);
+        }
+
+        if(stirMessage.activeInHierarchy && swtch.activeInHierarchy)
+        {
+            stirMessage.SetActive(false);
+            swtchOffMessage.SetActive(true);
+        }
+    }
+
+    void NeedFire()
+    {
+        if (needFire && !swtch.activeInHierarchy && !swtchOnMessage.activeInHierarchy)
+            swtchOnMessage.SetActive(true);
+        if (!needFire && swtch.activeInHierarchy && !swtchOffMessage.activeInHierarchy)
+            swtchOffMessage.SetActive(true);
     }
 
     void Sum()
@@ -76,6 +159,7 @@ public class Stick : MonoBehaviour
         if (total_MixCount == 48 && swtch.activeInHierarchy && sugar_white_mole.activeInHierarchy)
         {
             sugar_brown_mole.SetActive(true);
+            needFire = false;
         }
     }
 
@@ -88,6 +172,7 @@ public class Stick : MonoBehaviour
             {
                 withBakingSoda.SetActive(false);
                 sugar_brown_middle.SetActive(true);
+                overFlowing.SetActive(true);
             }
         }
         else if (sugar_brown_middle.activeInHierarchy)
@@ -96,7 +181,10 @@ public class Stick : MonoBehaviour
             if(time2 > 6)
             {
                 sugar_brown_middle.SetActive(false);
+                sugar_white_mole.SetActive(false);
+                sugar_brown_mole.SetActive(false);
                 sugar_brown_high.SetActive(true);
+                overFlowing.SetActive(true);
             }
         }
         else if (sugar_brown_high.activeInHierarchy)
@@ -104,8 +192,10 @@ public class Stick : MonoBehaviour
             time3 += Time.deltaTime;
             if(time3 > 6)
             {
-                sugar_brown_high.SetActive(false);
-                sugar_complete.SetActive(true);
+                if (overFlowing.activeInHierarchy)
+                    overFlowing.SetActive(false);
+                stirMessage.SetActive(false);
+                failed_overflow.SetActive(true);
             }
         }
     }
@@ -118,10 +208,6 @@ public class Stick : MonoBehaviour
             {
                 withBakingSoda.SetActive(false);
                 sugar_brown_middle.SetActive(true);
-            }
-            else if (sugar_brown_middle.activeInHierarchy) // 실패했을 때
-            {
-
             }
         }
     }
@@ -136,10 +222,7 @@ public class Stick : MonoBehaviour
                 sugar_white_mole.SetActive(false);
                 sugar_brown_mole.SetActive(false);
                 sugar_brown_high.SetActive(true);
-            }
-            else if (sugar_brown_high.activeInHierarchy) // 실패했을 때
-            {
-
+                overFlowing.SetActive(false);
             }
         }
     }
@@ -152,12 +235,20 @@ public class Stick : MonoBehaviour
             {
                 sugar_brown_high.SetActive(false);
                 sugar_complete.SetActive(true);
-            }
-            else if (sugar_complete.activeInHierarchy) // 실패했을 때
-            {
-
+                overFlowing.SetActive(false);
             }
         }
     }
 
+    void Clear()
+    {
+        if (sugar_complete.activeInHierarchy && !overFlowing.activeInHierarchy)
+        {
+            time += Time.deltaTime;
+            if (time > 1) {
+                stirMessage.SetActive(false);
+                clear.SetActive(true);
+            } 
+        }
+    }
 }
