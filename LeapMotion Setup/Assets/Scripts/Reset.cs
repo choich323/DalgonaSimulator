@@ -6,12 +6,10 @@ public class Reset : MonoBehaviour
 {
     public GameObject obj;
     Rigidbody rigid;
-    Vector3 pos;
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
-        pos = transform.position;
     }
 
     void OnTriggerEnter(Collider other)

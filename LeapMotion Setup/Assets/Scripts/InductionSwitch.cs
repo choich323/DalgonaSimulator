@@ -22,7 +22,7 @@ public class InductionSwitch : MonoBehaviour
     
     void Update()
     {
-        if (isOn)
+        if (isOn && white.activeInHierarchy && !complete.activeInHierarchy)
             burningCount += Time.deltaTime;
         Burning();
         Burned();
@@ -51,7 +51,7 @@ public class InductionSwitch : MonoBehaviour
 
     void Burning()
     {
-        if (burningCount > 20 && burningCount <= 35 && isOn)
+        if (burningCount > 20 && burningCount <= 40 && isOn)
             danger.SetActive(true);
 
         if (burningCount > 20 && !isOn)
@@ -61,7 +61,7 @@ public class InductionSwitch : MonoBehaviour
 
     void Burned()
     {
-        if(burningCount > 35 && !complete.activeInHierarchy)
+        if(burningCount > 40 && !complete.activeInHierarchy)
         {
             white.SetActive(false);
             white_mole.SetActive(false);

@@ -22,7 +22,7 @@ public class Sugar_drop : MonoBehaviour
             isWhite = true;
         }
 
-        if (!isBakingsoda && bakingCount == 4)
+        if (!isBakingsoda && bakingCount == 3)
         {
             sugar_white.SetActive(false);
             withBakingSoda.SetActive(true);

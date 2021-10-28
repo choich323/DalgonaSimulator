@@ -28,8 +28,6 @@ public class Stick : MonoBehaviour
     public int total_MixCount;
 
     bool isStart = false;
-    bool needFire = true;
-
     int mixCount1 = 0;
     int mixCount2 = 0;
     int mixCount3 = 0;
@@ -41,8 +39,6 @@ public class Stick : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-
-
         if (swtch.activeInHierarchy && sugar_white.activeInHierarchy && !sugar_white_mole.activeInHierarchy)
             MixCount(other, 6);
         else if (swtch.activeInHierarchy && sugar_white_mole.activeInHierarchy)
@@ -54,8 +50,6 @@ public class Stick : MonoBehaviour
         else if (!swtch.activeInHierarchy && sugar_brown_high.activeInHierarchy)
             MixCount(other, 27);
     }
-
-
 
     void MixCount(Collider other, int value)
     {
@@ -90,7 +84,7 @@ public class Stick : MonoBehaviour
             swtchOnMessage.SetActive(true);
         }
 
-        if (swtch.activeInHierarchy && !startMessage.activeInHierarchy)
+        if (swtch.activeInHierarchy && !startMessage.activeInHierarchy && isStart && !withBakingSoda.activeInHierarchy && !sugar_white_mole.activeInHierarchy && !sugar_complete.activeInHierarchy)
         {
             swtchOnMessage.SetActive(false);
             stirtoBrownMessage.SetActive(true);
@@ -126,19 +120,11 @@ public class Stick : MonoBehaviour
             stirMessage.SetActive(true);
         }
 
-        if(stirMessage.activeInHierarchy && swtch.activeInHierarchy)
+        if(stirMessage.activeInHierarchy && swtch.activeInHierarchy) // 예외 처리
         {
             stirMessage.SetActive(false);
             swtchOffMessage.SetActive(true);
         }
-    }
-
-    void NeedFire()
-    {
-        if (needFire && !swtch.activeInHierarchy && !swtchOnMessage.activeInHierarchy)
-            swtchOnMessage.SetActive(true);
-        if (!needFire && swtch.activeInHierarchy && !swtchOffMessage.activeInHierarchy)
-            swtchOffMessage.SetActive(true);
     }
 
     void Sum()
@@ -159,7 +145,6 @@ public class Stick : MonoBehaviour
         if (total_MixCount == 48 && swtch.activeInHierarchy && sugar_white_mole.activeInHierarchy)
         {
             sugar_brown_mole.SetActive(true);
-            needFire = false;
         }
     }
 
@@ -178,7 +163,7 @@ public class Stick : MonoBehaviour
         else if (sugar_brown_middle.activeInHierarchy)
         {
             time2 += Time.deltaTime;
-            if(time2 > 6)
+            if(time2 > 7)
             {
                 sugar_brown_middle.SetActive(false);
                 sugar_white_mole.SetActive(false);
