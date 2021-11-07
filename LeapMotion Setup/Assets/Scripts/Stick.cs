@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Stick : MonoBehaviour
 {
+    public GameManger manager;
+
     public GameObject sugar_white;
     public GameObject sugar_white_mole;
     public GameObject sugar_brown_mole;
@@ -130,6 +132,7 @@ public class Stick : MonoBehaviour
     void Sum()
     {
         total_MixCount = mixCount1 + mixCount2 + mixCount3 + mixCount4;
+        manager.Mix(total_MixCount);
     }
 
     void SugarChangetoWhiteMole()
@@ -227,7 +230,7 @@ public class Stick : MonoBehaviour
 
     void Clear()
     {
-        if (sugar_complete.activeInHierarchy && !overFlowing.activeInHierarchy)
+        if (sugar_complete.activeInHierarchy && !failed_overflow.activeInHierarchy)
         {
             time += Time.deltaTime;
             if (time > 1) {
