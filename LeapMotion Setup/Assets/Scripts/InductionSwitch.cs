@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class InductionSwitch : MonoBehaviour
 {
+    public GameManger manager;
+
     public GameObject swi;
     public GameObject burned;
     public GameObject white;
@@ -14,16 +16,24 @@ public class InductionSwitch : MonoBehaviour
     public GameObject failed;
     public GameObject complete;
 
+    public bool dummyswtch; // switch4만 사용되도록
     bool isOn = false;
     bool swtchReady = true;
+    bool onSugar = false;
     float burningCount; // 실패 판단
     float swtchDelay;
+
     public float rate;
     
     void Update()
     {
-        if (isOn && white.activeInHierarchy && !complete.activeInHierarchy)
+        if (white.activeInHierarchy)
+            onSugar = true;
+        if (isOn && onSugar && !complete.activeInHierarchy && !dummyswtch)
+        {
             burningCount += Time.deltaTime;
+            manager.Burning((int)burningCount);
+        }
         Burning();
         Burned();
         swtchDelay += Time.deltaTime;
@@ -51,7 +61,7 @@ public class InductionSwitch : MonoBehaviour
 
     void Burning()
     {
-        if (burningCount > 20 && burningCount <= 40 && isOn)
+        if (burningCount > 20 && burningCount <= 45 && isOn)
             danger.SetActive(true);
 
         if (burningCount > 20 && !isOn)
@@ -61,7 +71,7 @@ public class InductionSwitch : MonoBehaviour
 
     void Burned()
     {
-        if(burningCount > 40 && !complete.activeInHierarchy)
+        if(burningCount > 45 && !complete.activeInHierarchy)
         {
             white.SetActive(false);
             white_mole.SetActive(false);

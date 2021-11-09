@@ -30,6 +30,7 @@ public class Stick : MonoBehaviour
     public int total_MixCount;
 
     bool isStart = false;
+    bool isbrown = false;
     int mixCount1 = 0;
     int mixCount2 = 0;
     int mixCount3 = 0;
@@ -86,10 +87,11 @@ public class Stick : MonoBehaviour
             swtchOnMessage.SetActive(true);
         }
 
-        if (swtch.activeInHierarchy && !startMessage.activeInHierarchy && isStart && !withBakingSoda.activeInHierarchy && !sugar_white_mole.activeInHierarchy && !sugar_complete.activeInHierarchy)
+        if (swtch.activeInHierarchy && isStart && !isbrown)
         {
             swtchOnMessage.SetActive(false);
             stirtoBrownMessage.SetActive(true);
+            manager._burning.SetActive(true);
         }
 
         if (stirtoBrownMessage.activeInHierarchy && !swtch.activeInHierarchy) // 抗寇 贸府
@@ -107,13 +109,18 @@ public class Stick : MonoBehaviour
         if (swtchOffMessage.activeInHierarchy && !swtch.activeInHierarchy)
         {
             swtchOffMessage.SetActive(false);
-            bsPickupMessage.SetActive(true);
+            manager._burning.SetActive(false);
+            if(withBakingSoda.activeInHierarchy || sugar_brown_middle.activeInHierarchy || sugar_brown_high.activeInHierarchy)
+                stirMessage.SetActive(true);
+            else
+                bsPickupMessage.SetActive(true);
         }
 
         if(bsPickupMessage.activeInHierarchy && swtch.activeInHierarchy) // 抗寇 贸府
         {
             bsPickupMessage.SetActive(false);
             swtchOffMessage.SetActive(true);
+            manager._burning.SetActive(true);
         }
 
         if (bsPickupMessage.activeInHierarchy && withBakingSoda.activeInHierarchy)
@@ -125,6 +132,7 @@ public class Stick : MonoBehaviour
         if(stirMessage.activeInHierarchy && swtch.activeInHierarchy) // 抗寇 贸府
         {
             stirMessage.SetActive(false);
+            manager._burning.SetActive(true);
             swtchOffMessage.SetActive(true);
         }
     }
@@ -148,6 +156,7 @@ public class Stick : MonoBehaviour
         if (total_MixCount == 48 && swtch.activeInHierarchy && sugar_white_mole.activeInHierarchy)
         {
             sugar_brown_mole.SetActive(true);
+            isbrown = true;
         }
     }
 
@@ -183,6 +192,7 @@ public class Stick : MonoBehaviour
                 if (overFlowing.activeInHierarchy)
                     overFlowing.SetActive(false);
                 stirMessage.SetActive(false);
+                manager._mixBar_2.SetActive(false);
                 failed_overflow.SetActive(true);
             }
         }
@@ -236,6 +246,7 @@ public class Stick : MonoBehaviour
             if (time > 1) {
                 stirMessage.SetActive(false);
                 clear.SetActive(true);
+                manager.stopTImer = true;
             } 
         }
     }
