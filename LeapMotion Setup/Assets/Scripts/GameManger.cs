@@ -7,6 +7,8 @@ public class GameManger : MonoBehaviour
 {
     [SerializeField] private Text timer;
 
+    public GameObject menu;
+
     public GameObject untilBrownUI;
     public GameObject bsPickupUI;
     public GameObject stirUI;
@@ -25,13 +27,25 @@ public class GameManger : MonoBehaviour
     float _minute;
     public bool stopTImer = false;
 
-    void FixedUpdate()
+    void Update()
     {
-        OnoffUI();
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (menu.activeSelf)
+                menu.SetActive(false);
+            else
+                menu.SetActive(true);
+        }
+        if (menu.activeSelf)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
+
+        BarOnoffUI();
         Timer();
     }
 
-    void OnoffUI()
+    void BarOnoffUI()
     {
         if (untilBrownUI.activeInHierarchy)
         {

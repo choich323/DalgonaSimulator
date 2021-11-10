@@ -14,6 +14,7 @@ public class Stick : MonoBehaviour
     public GameObject sugar_brown_high;
     public GameObject sugar_complete;
     public GameObject swtch;
+    public GameObject _camera;
 
     public GameObject startMessage;
     public GameObject swtchOnMessage;
@@ -243,11 +244,17 @@ public class Stick : MonoBehaviour
         if (sugar_complete.activeInHierarchy && !failed_overflow.activeInHierarchy)
         {
             time += Time.deltaTime;
-            if (time > 1) {
+            if (time > 0.5f) {
                 stirMessage.SetActive(false);
                 clear.SetActive(true);
                 manager.stopTImer = true;
-            } 
+            }
+            if(time > 2.5f)
+            {
+                clear.SetActive(false);
+                _camera.transform.position = new Vector3(0.301f, 1.694f, 0.014f);
+                manager.stopTImer = false;
+            }
         }
     }
 }
