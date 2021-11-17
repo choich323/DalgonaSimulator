@@ -17,6 +17,8 @@ TagManager:
   - Finger
   - Palm
   - BakingSodaCase
+  - Press
+  - Frame
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Grip0.unity
+    guid: 115d87e9c486cdc4a9b9960f1285a499
+  - enabled: 1
+    path: Assets/Scenes/Grip1.unity
+    guid: ad194d661be1c614280a90860a2deee3
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6f3189c1559e39744a3fa5b986b86db7, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 02c2a6603dea808458cae4a9050f5bc7, type: 2}

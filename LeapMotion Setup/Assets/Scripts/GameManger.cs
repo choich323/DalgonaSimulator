@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManger : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class GameManger : MonoBehaviour
     float _second;
     float _minute;
     public bool stopTImer = false;
+    public bool stage2 = false;
+    public int stage;
 
     void Update()
     {
@@ -41,7 +44,9 @@ public class GameManger : MonoBehaviour
         else
             Time.timeScale = 1;
 
-        BarOnoffUI();
+        if(!stage2)
+            BarOnoffUI();
+
         Timer();
     }
 
@@ -60,8 +65,6 @@ public class GameManger : MonoBehaviour
             _mixBar_2.SetActive(true);
         else if (clearUI.activeInHierarchy)
             _mixBar_2.SetActive(false);
-
-
     }
 
     void Timer()
@@ -84,5 +87,15 @@ public class GameManger : MonoBehaviour
     public void Burning(int count)
     {
         burning.value = count;
+    }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene("Grip" + stage);
+    }
+
+    public void GameExit()
+    {
+        Application.Quit();
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Stick : MonoBehaviour
@@ -252,8 +253,8 @@ public class Stick : MonoBehaviour
             if(time > 2.5f)
             {
                 clear.SetActive(false);
-                _camera.transform.position = new Vector3(0.301f, 1.694f, 0.014f);
-                manager.stopTImer = false;
+                manager.stage2 = true;
+                SceneManager.LoadScene("Grip1");
             }
         }
     }
