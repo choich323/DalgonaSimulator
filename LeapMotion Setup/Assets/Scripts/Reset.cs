@@ -45,7 +45,7 @@ public class Reset : MonoBehaviour
             else if (obj.tag == "Frame")
             {
                 obj.transform.position = new Vector3(x, y, z);
-                obj.transform.rotation = Quaternion.Euler(179.716f, 121.267f, 3.675003f);
+                obj.transform.rotation = Quaternion.Euler(0, -30, 0);
             }
 
             rigid.velocity = Vector3.zero;
