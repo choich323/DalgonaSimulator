@@ -5,10 +5,16 @@ using UnityEngine;
 public class Reset : MonoBehaviour
 {
     public GameObject obj;
+    Transform trns;
     Rigidbody rigid;
+    float x;
+    float y;
+    float z;
 
     void Awake()
     {
+        trns = GetComponent<Transform>();
+        x = trns.position.x; y = trns.position.y; z = trns.position.z;
         rigid = GetComponent<Rigidbody>();
     }
 
@@ -18,18 +24,28 @@ public class Reset : MonoBehaviour
         {
             if (obj.tag == "Sugar")
             {
-                obj.transform.position = new Vector3(-0.6289f, 1.433f, 0.191f);
+                obj.transform.position = new Vector3(x, y, z);
                 obj.transform.rotation = Quaternion.identity;
             }
             else if (obj.tag == "BakingSoda")
             {
-                obj.transform.position = new Vector3(-0.955f, 1.433f, 0.23f);
+                obj.transform.position = new Vector3(x, y, z);
                 obj.transform.rotation = Quaternion.Euler(0, -38.612f, 0);
             }
             else if (obj.tag == "MixStick")
             {
-                obj.transform.position = new Vector3(-0.7522f, 1.381f, 0.1645f);
-                obj.transform.rotation = Quaternion.Euler(90, 90, 0);
+                obj.transform.position = new Vector3(x, y, z);
+                obj.transform.rotation = Quaternion.Euler(90, 0, 60);
+            }
+            else if(obj.tag == "Press")
+            {
+                obj.transform.position = new Vector3(x, y, z);
+                obj.transform.rotation = Quaternion.identity;
+            }
+            else if (obj.tag == "Frame")
+            {
+                obj.transform.position = new Vector3(x, y, z);
+                obj.transform.rotation = Quaternion.Euler(179.716f, 121.267f, 3.675003f);
             }
 
             rigid.velocity = Vector3.zero;
