@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Frame : MonoBehaviour
+public class TouchBoundary : MonoBehaviour
 {
     public isTouch touch1;
     public isTouch touch2;
@@ -13,8 +13,8 @@ public class Frame : MonoBehaviour
     public GameObject dalgona; // 달고나의 크기를 알기 위해
 
     bool allTouch = false;
-    bool isclear = false;
-    bool ispressed = false;
+    public bool isclear = false;
+    public bool ispressed = false;
 
     void FixedUpdate()
     {

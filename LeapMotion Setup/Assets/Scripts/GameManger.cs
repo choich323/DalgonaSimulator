@@ -10,19 +10,27 @@ public class GameManger : MonoBehaviour
 
     public GameObject menu;
 
+    // stage 1 UI
     public GameObject untilBrownUI;
     public GameObject bsPickupUI;
     public GameObject stirUI;
     public GameObject clearUI;
 
+    // stage 2 UI
+    public GameObject pressUI;
+    public GameObject frameUI;
+
+    public TouchBoundary touchBoundaries;
+
+    // stage 1 slider
     public GameObject _burning;
     public GameObject _mixBar_1;
     public GameObject _mixBar_2;
-
     public Slider burning;
     public Slider mixBar_1;
     public Slider mixBar_2;
 
+    // stage & timer
     float time;
     float _second;
     float _minute;
@@ -44,8 +52,11 @@ public class GameManger : MonoBehaviour
         else
             Time.timeScale = 1;
 
-        if(!stage2)
+        if(!stage2) // stage 1일때만
             BarOnoffUI();
+
+        if (stage2) // stage 2일때만
+            PressFrame();
 
         Timer();
     }
@@ -65,6 +76,18 @@ public class GameManger : MonoBehaviour
             _mixBar_2.SetActive(true);
         else if (clearUI.activeInHierarchy)
             _mixBar_2.SetActive(false);
+    }
+
+    void PressFrame()
+    {
+        if (touchBoundaries.ispressed) {
+            pressUI.SetActive(false);
+            frameUI.SetActive(true);
+        }
+        if (touchBoundaries.isclear)
+        {
+            frameUI.SetActive(false);
+        }
     }
 
     void Timer()

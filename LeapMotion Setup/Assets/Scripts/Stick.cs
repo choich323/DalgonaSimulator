@@ -167,7 +167,7 @@ public class Stick : MonoBehaviour
         if (withBakingSoda.activeInHierarchy)
         {
             time1 += Time.deltaTime;
-            if (time1 > 7)
+            if (time1 > 10)
             {
                 withBakingSoda.SetActive(false);
                 sugar_brown_middle.SetActive(true);
@@ -177,7 +177,7 @@ public class Stick : MonoBehaviour
         else if (sugar_brown_middle.activeInHierarchy)
         {
             time2 += Time.deltaTime;
-            if(time2 > 7)
+            if(time2 > 10)
             {
                 sugar_brown_middle.SetActive(false);
                 sugar_white_mole.SetActive(false);
@@ -189,7 +189,7 @@ public class Stick : MonoBehaviour
         else if (sugar_brown_high.activeInHierarchy)
         {
             time3 += Time.deltaTime;
-            if(time3 > 6)
+            if(time3 > 10)
             {
                 if (overFlowing.activeInHierarchy)
                     overFlowing.SetActive(false);
@@ -253,7 +253,6 @@ public class Stick : MonoBehaviour
             if(time > 2.5f)
             {
                 clear.SetActive(false);
-                manager.stage2 = true;
                 SceneManager.LoadScene("Grip1");
             }
         }

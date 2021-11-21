@@ -35,7 +35,7 @@ public class Reset : MonoBehaviour
             else if (obj.tag == "MixStick")
             {
                 obj.transform.position = new Vector3(x, y, z);
-                obj.transform.rotation = Quaternion.Euler(90, 0, 60);
+                obj.transform.rotation = Quaternion.Euler(0, 0, 90);
             }
             else if(obj.tag == "Press")
             {
