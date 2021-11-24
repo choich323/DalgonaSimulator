@@ -20,7 +20,10 @@ public class GameManger : MonoBehaviour
     public GameObject pressUI;
     public GameObject frameUI;
 
+    public GameObject touchDalgonaUI;
+
     public TouchBoundary touchBoundaries;
+    public Dalgona dalgona;
 
     // stage 1 slider
     public GameObject _burning;
@@ -52,12 +55,13 @@ public class GameManger : MonoBehaviour
         else
             Time.timeScale = 1;
 
-        if(!stage2) // stage 1일때만
+        if (!stage2) // stage 1일때만
             BarOnoffUI();
 
-        if (stage2) // stage 2일때만
+        if (stage2){ // stage 2일때만
             PressFrame();
-
+            
+        }
         Timer();
     }
 
@@ -80,13 +84,18 @@ public class GameManger : MonoBehaviour
 
     void PressFrame()
     {
-        if (touchBoundaries.ispressed) {
-            pressUI.SetActive(false);
-            frameUI.SetActive(true);
-        }
-        if (touchBoundaries.isclear)
+        if (!dalgona.isTouch)
         {
-            frameUI.SetActive(false);
+            if (touchBoundaries.ispressed)
+            {
+                pressUI.SetActive(false);
+                frameUI.SetActive(true);
+            }
+            if (touchBoundaries.isclear)
+            {
+                frameUI.SetActive(false);
+                touchDalgonaUI.SetActive(true);
+            }
         }
     }
 
