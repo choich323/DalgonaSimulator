@@ -16,7 +16,14 @@ public class Press : MonoBehaviour
         if (other.tag == "Press")
         {
             anim.SetBool("ispressed", true);
+        }
+    }
 
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Press")
+        {
+            anim.SetBool("ispressed", true);
         }
     }
 

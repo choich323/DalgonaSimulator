@@ -9,6 +9,7 @@ public class TouchBoundary : MonoBehaviour
     public isTouch touch3;
     public isTouch touch4;
     public GameObject star; // 눌린 흔적
+    public GameObject starBlack; // 바늘로 찌른 후의 눌린 흔적
     public GameObject frame; // 틀
     public GameObject dalgona; // 달고나의 크기를 알기 위해
 
@@ -43,6 +44,8 @@ public class TouchBoundary : MonoBehaviour
             star.SetActive(true);
             star.transform.position = frame.transform.position;
             star.transform.rotation = frame.transform.rotation;
+            starBlack.transform.position = frame.transform.position;
+            starBlack.transform.rotation = frame.transform.rotation;
             isclear = true;
         }
     }

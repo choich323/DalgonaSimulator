@@ -19,6 +19,7 @@ TagManager:
   - BakingSodaCase
   - Press
   - Frame
+  - Needle
   layers:
   - Default
   - TransparentFX
