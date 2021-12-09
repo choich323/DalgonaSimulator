@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class success : MonoBehaviour
 {
+    public GameManger manager;
     public Dalgona dalgona;
     public GameObject dalgonaObject;
     public GameObject needle;
     public GameObject cam;
+    public GameObject BbogiUI;
+    public GameObject SuccessUI;
+    public GameObject caution;
 
     Renderer render;
 
@@ -18,6 +22,10 @@ public class success : MonoBehaviour
 
     void Update()
     {
+        if(dalgona.black == 1)
+        {
+            BbogiUI.SetActive(false);
+        }
         if (dalgona.black == 50)
         {
             render.enabled = true;
@@ -27,7 +35,10 @@ public class success : MonoBehaviour
             cam.transform.rotation = Quaternion.identity;
             dalgonaObject.SetActive(false);
             needle.SetActive(false);
-            dalgona.board.GetComponent<MeshRenderer>().enabled = true;
+            caution.SetActive(false);
+            dalgona.board.GetComponent<MeshRenderer>().enabled = true; // 보드 그래픽 활성화
+            SuccessUI.SetActive(true); // 성공 UI
+            manager.stopTImer = true; // 시간 멈추기
         }
     }
 }

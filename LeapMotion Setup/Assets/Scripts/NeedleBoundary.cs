@@ -19,7 +19,7 @@ public class NeedleBoundary : MonoBehaviour
         if(other.tag == "Needle")
         {
             stack++;
-            if (stack == 6)
+            if (stack == 8)
             {
                 render.enabled = true;
                 dalgona.black++;
