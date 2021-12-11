@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManger : MonoBehaviour
 {
-    [SerializeField] private Text timer;
+    [SerializeField] public Text timer;
 
     public GameObject menu;
 
@@ -35,8 +35,8 @@ public class GameManger : MonoBehaviour
 
     // stage & timer
     float time;
-    float _second;
-    float _minute;
+    public float _second;
+    public float _minute;
     public bool stopTImer = false;
     public bool stage2 = false;
     public int stage;
@@ -107,7 +107,7 @@ public class GameManger : MonoBehaviour
         _second = (int)(time % 60);
         _minute = (int)(time / 60 % 60);
 
-        timer.text = string.Format("{0:00}:{1:00}", _minute, _second);
+        timer.text = string.Format("{0:00}:{1:00}", _minute, _second);      // 현재 시간
     }
 
     public void Mix(int count)
@@ -119,6 +119,16 @@ public class GameManger : MonoBehaviour
     public void Burning(int count)
     {
         burning.value = count;
+    }
+
+    public void Next()
+    {
+        SceneManager.LoadScene("Grip1");
+    }
+
+    public void Previous()
+    {
+        SceneManager.LoadScene("Grip0");
     }
 
     public void Retry()
